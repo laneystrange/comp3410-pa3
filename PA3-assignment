@@ -1,0 +1,103 @@
+COMP3410
+Spring 2015
+Programming Assignment #3 (PA3)
+Assigned: 4/1/15
+Deadline: 4/8/15
+
+###############################################################
+#
+# PART ONE. 20 points.
+# 
+###############################################################
+
+Rewrite the following sequence of instructions to minimize the total
+number of hazards. Include comments in your solution describing all
+the original hazards you're getting rid of.
+
+lw  $s2, 0($s1)
+lw  $s1, 16($s6)
+sub $s6, $s1, $s2
+add $s6, $s2, $s2
+or  $s3, $s6, $zero
+sw  $s6, 12($s1)
+addi $s4, $s4, 10
+subi $s5, $s4, 4
+
+Note that the above sequence includes references to arrays at
+addresses stored in $s1 and $s6. Your complete solution should create
+some data (integers are fine) at those locations.
+
+If you aren't able to completely eliminate all hazards, you README
+should provide an explanation. How close did you actually get?
+
+Submission instructions:
+
+* Submit a complete working .asm file with the revised code snippet,
+  including all set-up and data creation tha tyou need to make it
+  work.
+
+* Your .asm file should include comments indicating where you moved
+  code around to eliminate hazards.
+
+* Your README file for this assignment should include a summary of
+  hazards you eliminated, as noted above: were you able to eliminate
+  all of them? If not, why not? How close are you able to get?
+
+
+###############################################################
+#
+# PART TWO. 35 points.
+# 
+###############################################################
+
+For this problem, you will write a subroutine in MIPS that computes an
+exponent x^k, where x is a floating-point number (single-precision),
+and k is an integer.
+
+Start by prompting the user and reading in the values of x and
+k. (Remember that floating-point opeartions are special and unique,
+including the arguments stacked for syscalls.)  Invoke your exponent
+subroutine, return the value to the caller, and print the result to
+the console.
+
+Both x and y should be able to be positive or negative. Your result
+should be a float.
+
+Submission instructions:
+
+* Submit a complete working .asm file that does the exponent calculation.
+
+* Your README file for this assignment should include at least 4 values of (x,k) that you have tested and the results you saw.
+
+
+###############################################################
+#
+# PART TWO. 45 points.
+# 
+###############################################################
+
+For this problem, you will write a subroutine in MIPS that
+approximates the square root of a floating-point number
+(double-precision) and stores the result as an int.
+
+Do not use the MIPS sqrt instruction.
+
+Start by prompting the user and reading in a double-precision floating
+point number. Next, invoke a subroutine that calculates an integer
+that approximates the square root, rounded to the nearest integer.
+
+For example, if the input is 4.0, return 2. If the input is 5.89,
+return 2. If the input is 500.1234, return 22.
+
+You should verify that your input, coming from the user, is a valid
+nonnegative floating-point number.
+
+After invoking your subroutine, print the result (an integer) to the
+terminal.
+
+Submission instructions:
+
+* Submit a complete working .asm file that does the sqrt calculation as described.
+
+* Your README file for this assignment should include at least 4 input
+  values that you tested and the results that you saw.
