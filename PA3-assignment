@@ -55,7 +55,7 @@ exponent x^k, where x is a floating-point number (single-precision),
 and k is an integer.
 
 Start by prompting the user and reading in the values of x and
-k. (Remember that floating-point opeartions are special and unique,
+k. (Remember that floating-point operations are special and unique,
 including the arguments stacked for syscalls.)  Invoke your exponent
 subroutine, return the value to the caller, and print the result to
 the console.
@@ -72,7 +72,7 @@ Submission instructions:
 
 ###############################################################
 #
-# PART TWO. 45 points.
+# PART THREE. 45 points.
 # 
 ###############################################################
 
