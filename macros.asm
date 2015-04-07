@@ -8,6 +8,7 @@ li $v0, 1
 syscall
 .end_macro
 
+<<<<<<< HEAD
 .macro read_int
 li $v0, 5
 syscall
@@ -20,6 +21,20 @@ syscall
 
 .macro read_double
 li $v0, 7
+=======
+.macro print_float
+li $v0, 2
+syscall
+.end_macro
+
+.macro read_int
+li $v0, 5
+syscall
+.end_macro
+
+.macro read_float
+li $v0, 6
+>>>>>>> c4290bccdfb9b2ab4d491528f98968826ab9e4b9
 syscall
 .end_macro
 
