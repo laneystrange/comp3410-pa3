@@ -60,7 +60,7 @@ including the arguments stacked for syscalls.)  Invoke your exponent
 subroutine, return the value to the caller, and print the result to
 the console.
 
-Both x and y should be able to be positive or negative. Your result
+Both x and k should be able to be positive or negative. Your result
 should be a float.
 
 Submission instructions:
