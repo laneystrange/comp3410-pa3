@@ -1,6 +1,9 @@
 # comp3410-pa3
-1. Made moset of the hazards go away by moving some of the instructions around to minimize the total number of hazards and declared an array of a large size to use in program
-2. Enter the number: 
+
+##Problem one
+ Made moset of the hazards go away by moving some of the instructions around to minimize the total number of hazards and declared an array of a large size to use in program
+##Problem 2
+Enter the number: 
 **** user input : 2
 Enter the exponent: 
 **** user input : 8
@@ -40,7 +43,7 @@ The answer is: 1
 --Ended--
 -- program is finished running --
 
-3.
+##Problem 3
 Please enter a number that you would like to find the square root of: 
 **** user input : 44
 6.6332493
