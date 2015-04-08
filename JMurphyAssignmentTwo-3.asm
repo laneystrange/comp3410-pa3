@@ -15,9 +15,11 @@ Answer:		.asciiz	   "Your answer is: \n"
 NumberofIterations: .asciiz "Please enter the number of Iteration. Example: 100\n"
 ErrorQ: .asciiz "Pleae enter a number which is greater than zero!"
 Ended: .asciiz "\n--Ended--"
-Y: .float 1.0
-SmallValue: .float 0.000001
-Two:		.float 2.0
+Checking: .asciiz "\nWorking\n"
+
+Y: .double 1.0
+SmallValue: .double 0.000001
+Two:		.double 2.0
 
 
 .text
@@ -29,55 +31,50 @@ li	$v0, 4
 la	$a0, StartingStatment		
 syscall	
 
-li	$v0, 6		#load a six into vo for syscall user input	
-syscall			
-mov.s $f5, $f0		#$f5 have value
-mov.s $f9, $f5		##### convert float to int
-cvt.w.s $f9, $f9
-mfc1 $t1, $f9		#converted int stored in t1
+li	$v0, 7			
+syscall	
+		
+mov.d $f6, $f0		#$f6 have value
+mov.d $f10, $f6		##### convert float to int
+cvt.w.d $f10, $f10
+mfc1 $t1, $f10		#converted int stored in t1
 
-blt $t1,0,ErrorG	#if int is less than one then throw an error
+blt $t1,0,ErrorG
 
-l.s $f3, Y		#loading float into $f3
-l.s $f1, SmallValue	#load value into f1
-l.s $f9, Two		#load value into f9
+l.d $f4, Y
+l.d $f8, SmallValue
+l.d $f10, Two
 
-j FindSqaureRoot	#now find the square root 
+j FindSqaureRoot
 
 FindSqaureRoot:
 
-#$f5 		#x
-#f3		#y 
-#f1		#SmallValue
-mov.s $f11,$f5 #n
+#$f6 	#x
+#f4		 #y 
+#f8		#SmallValue
 
-#while(x - y > e)
-#  {
-#    x = (x + y)/2;
-#    y = n/x;
-#  }
-#  return x;
+mov.d $f14,$f6 #n
 
 SubtractionChecking:
-sub.s $f2,$f5,$f3				#x-y
+sub.d $f2,$f6,$f4				#x-y
 
-c.lt.s  $f2,$f1         		# is (x-y) < e?
-bc1t    Print           		#yes:  print(Move towards answer)
-
-c.lt.s  $f1,$f2         	 	# is (x-y) > e?
-bc1t    Loop          		 	# yes: Continue with the #loop!
+c.lt.d  $f8,$f2         		# is (x-y) < e?
+bc1t    Loop           			#yes:  print(Move towards answer)
+bc1f 	Print					#no	:
 
 
 Loop:
-add.s $f7,$f5,$f3				#x+y
-div.s $f5,$f7,$f9				#divding it by 2
-div.s $f3,$f11,$f5				#n/x
+
+add.d $f6,$f6,$f4				#x+y
+div.d $f6,$f6,$f10				#divding it by 2
+div.d $f4,$f14,$f6				#n/x
+
 j SubtractionChecking
 
 #Printing the answer!
 Print:
-mov.s $f12,$f5
-li $v0,2
+mov.d $f12,$f6
+li $v0,3
 syscall
 
 j EndProgram
@@ -91,9 +88,9 @@ syscall
 j EndProgram
 
 EndProgram:
-	li	$v0, 4			# printing message for xvalue
-	la	$a0, Ended		
-	syscall		
+li	$v0, 4			# printing message for xvalue
+la	$a0, Ended		
+syscall		
 	
-	li $v0,10
-	syscall
+li $v0,10
+syscall
