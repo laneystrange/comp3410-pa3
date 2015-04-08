@@ -37,12 +37,11 @@ raisepwr: #raises number in f0 to number in a0
 	# now, if the number to raise by is negative,
 	# we divide 1 by the input number
 	addi $t0, $0, 0
-	bgt $a0, $t0, pwrlp
+	bgt $a0, $t0, strtlp
 	l.s $f2, fp_one
 	div.s $f0, $f2, $f0
 	abs $a0, $a0
-	# copy the initial value to f2
-	mov.d $f2, $f0
+strtlp:mov.d $f2, $f0
 	# first, if a0 is 1, then we are done
 pwrlp:	addi $t0, $0, 1 # t0 = 1
 	beq $a0, $t0, endpwr

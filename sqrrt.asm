@@ -2,9 +2,8 @@
 # by kevin fisher
 
 .data
-	s_intro: .asciiz "Hello, welcome to sqrrt.asm, by Kevin Fisher\n"
-	s_inputd: .asciiz "Please input a number of which to find the square root: \n"
-	s_result: .asciiz "The result is:\n"
+	s_intro: .asciiz "Hello, welcome to sqrrt.asm, by Kevin Fisher\nPlease input a number: \n"
+	s_result: .asciiz "The square root is:\n"
 	s_error: .asciiz "Your input must be greater than 0!\n"
 	fp_one: .double 1
 	fp_inc: .double 0.5
