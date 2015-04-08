@@ -1,0 +1,25 @@
+#Nathaniel Warren
+#PA3P3
+
+
+.data
+ array: .word 9,1,-8,3,6
+ array2: .word 13,15,12,4,2
+ 
+.text
+ 
+#must set up array to be used and referenced in original code
+la $s1, array
+la $s6, array2
+
+
+lw $s2, 0($s1)
+lw $s1, 16($s6)
+addi $s4, $s4, 10  #inserted from line 9 - solved hazard1
+sub $s6, $s1, $s2 
+add $s6, $s2, $s2	
+or $s3, $s6, $zero
+#sw $s6, 12($s1)  attempt to remove hazard - non resolved hazard2
+#addi $s4, $s4, 10 moved to 3rd line - solved hazard1
+subi $s5, $s4, 4 
+sw $s6, 12($s1) #non resolved hazard2
