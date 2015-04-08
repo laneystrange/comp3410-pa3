@@ -24,10 +24,8 @@ main:
 	
 	read_double
 	
-	mov.d $f12, $f0
-	jal round
-
-	move $a0, $v0
+	round.w.d $f0, $f0
+	mfc1.d $a0, $f0
 	jal isqrt
 	
 	move $s0, $v0
@@ -39,20 +37,6 @@ main:
 	print_int
 	
 	exit
-
-###############################################
-# function: round
-# takes --
-# $f12 : a double
-# returns --
-# $v0 : the nearest integer
-###############################################
-round:
-	l.d $f16, half		# $f16 = 0.5
-	add.d $f12, $f12, $f16	# $f12 = x + 0.5
-	cvt.w.d $f12, $f12	# $f12 = floor(x + 0.5)
-	mfc1.d $v0, $f12	# $v0 = floor(x + 0.5)
-	jr $ra			# return
 
 ###############################################
 # function: isqrt
