@@ -1,6 +1,6 @@
 #Frank Martino
 #4/7/2015
-#Part One fixing scheduling for the code
+
 
 .data 
 array:		.word 5, 7, 13, 11, 43, 20, 19

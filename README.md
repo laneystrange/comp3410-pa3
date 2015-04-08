@@ -3,6 +3,7 @@
 Frank Martino 4/6/2015
 
 
+
 ***** Part One *******
 
 Hazard elimination: Through coorecting the code I was able to fix many of the hazards but not all as some of the hazards in the code snipet were unfortunatley impossible to remove,
