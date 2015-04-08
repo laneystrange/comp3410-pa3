@@ -6,7 +6,7 @@
 .data
 srtpmpt:	.asciiz "This program approximates the nearest integer square root of a floating point number. \n"
 valpmpt:	.asciiz "Enter your floating point number: "
-rstpmpt:	.asciiz "The result is: "
+rstpmpt:	.asciiz "The closest result is: "
 
 .text
 main:
