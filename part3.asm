@@ -5,6 +5,7 @@
 .data
 prompt: .asciiz "Enter a decimal to get square-rooted: "
 complete: .asciiz "The square root rounded to the nearest whole number is: "
+badinput: .asciiz "Asking me to calculate imaginary square roots? Nah."
 pointfive: .double 0.5
 
 .text
@@ -12,6 +13,8 @@ la $a0, prompt
 jal printstr
 li $v0, 7
 syscall
+c.lt.d $f0, $f2
+bc1t negative
 mov.d $f12, $f0	#copy it both as an outgoing argument
 mov.d $f14, $f0	#and to a safe spot (second arg for newton's method later
 jal float_sqrt
@@ -100,6 +103,11 @@ newton:
 	newton_finish:
 		mov.d $f0, $f12
 jr $ra
+
+negative:
+	la $a0, badinput
+	jal printstr
+j exit
 		
 pr_int:
 	li $v0, 1

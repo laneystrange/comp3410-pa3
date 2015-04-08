@@ -1,6 +1,6 @@
 #Ben Murphy
 #COMP 3410 PA3
-#Part 2
+#Part 2 - Floating Powers
 
 .data
 prompt1: .asciiz  "Floating-point base?: "
