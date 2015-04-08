@@ -59,9 +59,9 @@ main:
 	
 	
 	Positive:
-	li $t3,0
+	li $t3,0	#set counter to 0
 	Loop_P:
-	beq $t3,$t0,Here
+	beq $t3,$t0,Here 
 	mul.s $f3,$f3,$f5
 	add $t3,$t3,1
 	j Loop_P
@@ -82,17 +82,17 @@ main:
 	jr $ra
 	
 	CheckIfExponentIsEven:
-	li $t5,2
-	div $t0, $t5
+	li $t5,2	#load 2 into t5 to check if even
+	div $t0, $t5	#divide by two
 	mfhi $t6
-	beq $t6,0,EvenExponent
-	li $t8,0
+	beq $t6,0,EvenExponent #if it is equal to zero then it is even
+	li $t8,0		#load zero into t8
 	jr $ra
 	EvenExponent:
-	li $t8,1
+	li $t8,1	#if exponent is even then load 1 into t8
 	jr $ra
 	
-	PrintAnswerP:
+	PrintAnswerP:	#printing p 
 	mov.s $f12,$f3
 	li	$v0, 4		
 	la	$a0, Answer		
@@ -101,7 +101,7 @@ main:
 	syscall
 	j EndProgram
 	
-	PrintAnswerN:
+	PrintAnswerN: 	#printing n
 	mul.s $f3,$f3,$f2
 	mov.s $f12,$f3
 	li	$v0, 4		
@@ -114,26 +114,28 @@ main:
 	
 	
 	PrintIfExponentZero:
-	li	$v0, 4		
-	la	$a0, Answer		
-	syscall	
+	li	$v0, 4		#if positive set up print
+	la	$a0, Answer	#print the answer
+	syscall			#call syscall
 	li $t7,1
 	move $a0,$t7
-	li $v0,1
-	syscall
-	j EndProgram
+	li $v0,1		#set up to print int
+	syscall			#print int
+	j EndProgram		#end program
 	
-	ErrorGenerated:
-	li	$v0, 4		
-	la	$a0, msg		
-	syscall			
-	j EndProgram
+	ErrorGenerated:	
+	li	$v0, 4		#load print string	
+	la	$a0, msg	#print error message
+	syscall			#call syscall
+	j EndProgram		#end program
 	
 	EndProgram:
 	li	$v0, 4			# printing message for xvalue
 	la	$a0, Ended		
 	syscall		
 	
-	li $v0,10
-	syscall
+	
+	#end the program
+	li $v0,10			#load the call to end the program
+	syscall				#call syscall
 	

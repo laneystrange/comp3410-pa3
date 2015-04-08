@@ -29,25 +29,25 @@ li	$v0, 4
 la	$a0, StartingStatment		
 syscall	
 
-li	$v0, 6			
+li	$v0, 6		#load a six into vo for syscall user input	
 syscall			
 mov.s $f5, $f0		#$f5 have value
 mov.s $f9, $f5		##### convert float to int
 cvt.w.s $f9, $f9
 mfc1 $t1, $f9		#converted int stored in t1
 
-blt $t1,0,ErrorG
+blt $t1,0,ErrorG	#if int is less than one then throw an error
 
-l.s $f3, Y
-l.s $f1, SmallValue
-l.s $f9, Two
+l.s $f3, Y		#loading float into $f3
+l.s $f1, SmallValue	#load value into f1
+l.s $f9, Two		#load value into f9
 
-j FindSqaureRoot
+j FindSqaureRoot	#now find the square root 
 
 FindSqaureRoot:
 
-#$f5 	#x
-#f3		 #y 
+#$f5 		#x
+#f3		#y 
 #f1		#SmallValue
 mov.s $f11,$f5 #n
 
