@@ -3,6 +3,18 @@ COMP3410
 PA3
 4/7/15
 
+Problem 1: 
+	
+	First change:
+		 Moved, addi $s4, $s4, 10, in between, sub $s6, $s1, $s2, and, add $s6, $s2, $s2.
+		 
+	Second change:
+		 Moved, subi $s5, $s4, 4, in between, add $s6, $s2, $s2, and, or  $s3, $s6, $zero.
+
+	Conculsion:
+		I made these changes because this should buffer the read and write from registers
+		$s6 and $s1.
+	
 Problem 2:
 
 	Input: A float value(x) and an integer (y)
