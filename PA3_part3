@@ -1,0 +1,65 @@
+#Denzel Young
+#Programming Assingnment 3: Part 3
+
+.data
+	Welcome: .asciiz "This program will find the square root of a floating point number, now with double precision! \n"
+	Prompt: .asciiz "Please enter a floating point number: \n"
+	Result: .asciiz "The approximate square root of your number is: \n"
+	
+	#Required values for fast inverse square root.
+	MagicNumber: .word 1597463007
+	TradeOff: .space 4
+	Store1: .float 1
+	Store2: .float 0.5
+	Store3: .float 1.5
+.text
+	#Print the program welcome.
+	li $v0, 4
+	la $a0, Welcome
+	syscall
+	
+	#Print the number request
+	li $v0, 4
+	la $a0, Prompt
+	syscall
+	
+	#Reads in the user's double precision number.
+	li $v0, 6
+	syscall
+	mov.s $f1, $f0
+	
+	#Stores the required values initialized in .data
+	l.s $f18, Store1
+	l.s $f19, Store2
+	l.s $f20, Store3
+	lw $s0, MagicNumber
+	
+	#calculates the square root through "Inverse Fast Square Root
+	mul.s $f2, $f19, $f1
+	s.s $f1, TradeOff
+	lw $t0, TradeOff
+	srl $t0, $t0, 1
+	sub $t0, $s0, $t0
+	sw $t0, TradeOff
+	l.s $f1, TradeOff
+	mul.s $f2, $f2, $f1
+	mul.s $f2, $f2, $f1
+	sub.s $f2, $f20, $f2
+	mul.s $f1, $f1, $f2
+	div.s $f1, $f18, $f1
+	mov.s $f0, $f1
+	
+	#Prints result message
+	li $v0, 4
+	la $a0, Result
+	syscall
+	
+	round.w.s $f0, $f0 #Rounds result to nearest integer.
+	mfc1 $a0, $f0 #Moves from coprocessor to make it accessible.
+	li $v0, 1
+	syscall
+	
+	#Exit program
+	li $v0, 10
+	syscall
+	

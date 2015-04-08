@@ -1,0 +1,37 @@
+#This is the orignal code given in the programming assignment.
+#The reason I havae this section included is to point out places where we have hazards
+
+	#lw  $s2, 0($s1) --No hazard--
+	#lw  $s1, 16($s6) Here is our first hazard. It needs to load into $s1, but the previous instruction isn't done loading the value of $s1 into $s2
+	#---Hazard block---#
+	#sub $s6, $s1, $s2 Another potential hazard here. We are about to subtract from $s6, but it still needs to be read from in the previous instruction.
+	#add $s6, $s2, $s2 Same hazard, but a different line in this case. $s6 is still being subtracted from.
+	#or  $s3, $s6, $zero The value of $s6 is still not set.
+	#------Danger!-----#
+	#sw  $s6, 12($s1) --No hazard--
+	#addi $s4, $s4, 10 --No hazard--
+	#subi $s5, $s4, 4 $s4 is still being added to from the previous instruction.
+	
+#A better order for the instructions that would avoid many of the hazards as the order above:
+#Note that this order completely disregards the original purpose of the code, but does create the arrays needed at $s1 and %s6
+
+.data
+array1: .word 0:12 #creates a 12 int array
+array2: .word 0:12 #creates another array for $s6
+
+.text
+	la $s1, array1 #No Hazard
+	la $s6, array2 #No Hazard
+	
+	lw $s2, 0($s1) #loads the contents of #s2 to array1[1]
+	addi $s4, $s4, 10 #adds 10 to $s4, lw is now at ID
+	lw $s1, 16($s6) #loads array2[5] to $s1, this is safe now since the lw with #s1 has reached EXE
+	sw $s6, 12($s1) #stores array1[4] into $s6
+	add $s6, $s2, $s2 #adds the value of $s2 twice and stores to $s6
+	subi $s5, $s4, 4 #subtracts 4 from the value of $s4, safe since addi is now in EX
+	or $s3, $s6, $zero #logic OR statement using $s3 and $s6
+	sub $s6, $s1, $s2 #sets $s6 to $s1 - $s2
+	
+#This new order eliminates all of the hazards from the previous order by allowing each instruction
+#to reach a clock cycle where it is permitted to use/edit the data needed by the instruction.
+	
