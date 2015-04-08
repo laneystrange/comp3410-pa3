@@ -1,0 +1,21 @@
+
+.data
+array: .word 0,1,2,3,4,5,6,7
+
+.text
+
+la $s1, array #loads array 
+lw $s2, 0($s1)
+la $s6, array# loads array
+lw $s1, 16($s6)
+nop # lw read form memory at the same time as the calculation
+sub $s6, $s1, $s2
+add $s6, $s2, $s2
+nop #the final value is stored in WB, but s6 is used as a source before its updated 
+or $s3, $s6, $zero
+la $s1, array #loads array
+sw $s6, 12($s1)
+addi $s4, $s4, 10
+nop # the same issue that happens above happens here
+subi $s5, $s4, 4
+
