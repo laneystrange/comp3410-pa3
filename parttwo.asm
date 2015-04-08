@@ -43,7 +43,7 @@ la $a0, rstpmpt		# load the string 'rstpmpt' address into the argument register
 syscall			# make the syscall to print the 'rstpmpt' string
 
 li $v0, 2		# load syscall code for print float into the return value register
-add.s $f12, $f0, $f4	# load the float result value into the argument register
+mov.s $f12, $f0		# load the float result value into the float argument register
 syscall			# make the syscall to print the float result value
 
 exit:
