@@ -20,6 +20,7 @@ Result is 0.10142398
 Result is 44.889996
 
 part 3: calculate squareroot
+
 Enter a floating-point number(double precision):4.0
 Result is 2
 
