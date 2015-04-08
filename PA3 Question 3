@@ -1,0 +1,75 @@
+.data
+
+zero: .double 0.0 #double precision float in memory
+one: .double 1.0
+half: .double 0.5
+errorMsg: .asciiz "You entered an invalid number try again.\n" 
+answer: .double 0
+ 
+.text
+calculateSqrt:
+
+
+la $v0, 7 
+syscall #read a double precision float 
+#f0 gets fliat from user
+l.d $f4, zero #load 0 to f0
+
+c.lt.d $f0, $f4
+bc1t ERROR
+
+mov.d $f2, $f0 
+
+round.w.d $f2, $f2
+cvt.d.w $f2, $f2
+
+l.d $f6, one 
+l.d $f8, one 
+
+loop: 
+ mul.d $f10, $f6, $f6 # multiply f4 
+ c.lt.d $f2, $f10 #compare the rounded value 
+ 
+        bc1t finishCalc #branch if the f1 is less than f6
+       
+        add.d $f6, $f6, $f8 
+ j loop 
+  
+
+finishCalc:
+ sub.d $f6, $f6, $f8
+ 
+ 
+ 
+ j end 
+ 
+ERROR:
+ li $v0, 4
+ la $a0, errorMsg
+ syscall
+ j calculateSqrt
+ 
+end:
+ l.d $f0, half
+ add.d $f8, $f6, $f0
+ mul.d $f10, $f8, $f8
+ c.lt.d $f10, $f2
+ bc1t roundAnswer
+ j endFinal
+
+roundAnswer:
+
+ l.d $f8, one #load 1 to f08
+ add.d $f6, $f6, $f8
+ 
+
+endFinal:
+ 
+ round.w.d $f6, $f6
+ cvt.d.w $f6, $f6 
+ s.d $f6, answer
+ 
+ li $v0, 3 
+ mov.d $f12, $f6
+ syscall
+ 
