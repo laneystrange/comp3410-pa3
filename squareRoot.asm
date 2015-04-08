@@ -1,73 +1,54 @@
 # COMP3410
 # Author: Kendal Harris
 # Assignment: PA[3]
-# Date: 6 April 2015
-
-#REGISTER KEY
-# $f0 --> holds syscall inputs
-# $f2 --> holds base number
-# $f4 --> holds low value
+# Date: 7 April 2015
 
 ##########################################################
 #EXPONENT CALCULATION DATA SECTION
 ##########################################################
+.data
 
-	.data
 promptArg: .asciiz "Please enter a positive argument.\n" #prompt user to enter input
 result: .asciiz "\nThe result is: "
-const: .double 2
-reference: .double 1
+half: .double 2
+counterStart: .double 1
+zeroRef: .double 0
 ###############################################
 #EXPONENT CALCULATION TEXT SECTION
 ###############################################
-	.text
-	
-	l.d $f4, reference	#lowest value starts at 1
-	l.d $f14,const		#load 2 into $f14
-      	      
-#GET ARGUMENTS FROM USER
+.text
+    	      l.d $f2,counterStart #starts the while loop counter at 1
+    	      
+#GET ARGUMENT FROM USER
 obtainInput: #PROMPT FOR ARGUMENT
-	     li  $v0,4 #prep call for displaying string
-	     la $a0,promptArg #load propmt for base number
-	     syscall #proceed with string display
-	     li $v0,7 #prep call for collecting an double float (stored in $f0)
-	     syscall #proceed with obtaining user input
-	     mov.s $f2,$f0 #store argument in $f2
-	     mov.s $f16, $f2 #make a copy of input
-	    
-	#move $t1, $t0		#Moves the previous value of $t0 into $t1
-while:	sub.d $f6, $f16, $f4	#hi-lo
-	add.d $f8, $f4, $f6	# $f8 = $f4 + $f6
-if:	div.d $f8, $f8, $f14	# $f8 = lo+ (hi-lo)/2 -->mid value
-	sub.d $f10, $f8, $f2	# $f10 = $f8 - $f2 -->mid - input
-	mul.d $f12, $f8, $f10	# mid * mid -input
-	c.le.d $f12, $f4	#check mid * mid-input <=1
-					# if so --> hi = mid
-					# if not --> lo = mid
-	bc1f greater		#if so --> hi = mid
-	bc1t less		#if not --> lo = mid
-continue: c.le.d $f6,$f4	# check hi - lo<=1
-	  bc1f while		#means hi-lo > 1 -->repeat while loop
-	
-	#at end of loop lo is in $f4 --> return lo
+	     li  $v0,4 	      #prep call for displaying string
+	     la $a0,promptArg #load propmt for argument
+	     syscall          #proceed with string display
+	     li $v0,7 	      #prep call for collecting an double float
+	     syscall 	      #proceed with obtaining user input (stored in $f0)
+	     c.lt.d $f0,$f2   #check if input < 0
+	     bc1t obtainInput
 	     
-#Show a confirmation of the number selected
-display:     mov.s $f12,$f4 #move result into $f12
-	     #mov.s $f12,$f6 #move result into $f12
-	     li  $v0,4 #prep call for displaying string
-	     la $a0,result #load propmt for base number
-	     syscall #proceed with string display
-	     li $v0, 2 #prep call for displaying a float
+	     
+while:	     add.d $f4,$f4,$f2 #increment value (starts at 1)
+	     mul.d $f6,$f4,$f4 #square loop counter value
+ 	     c.le.d $f6,$f0    #check if square value <= user input
+	     bc1t while        	#if true repeat until square value > user input
+	
+finalAnswer: sub.d $f6,$f6,$f0 #revert back to last acceptable squared value (this is double the correct answer) 
+	     l.d $f10,half	
+	     div.d $f6,$f6,$f10 #divide by 2 (correct answer with decimal)
+	     #TRUNCATE RESULT
+	     trunc.w.d $f6,$f6
+	     cvt.d.w $f6,$f6	#correct final answer
+	     
+	     #DISPLAY RESULT
+display:     mov.d $f12,$f6 	#move result to $f12
+	     li  $v0,4 		#prep call for displaying string
+	     la $a0,result 	#load result string
+	     syscall 		#proceed with string display
+	     li $v0, 3 		#prep call for displaying a double float value
 	     syscall
-	      # The program is finished. Exit.
-	      li   $v0, 10          # system call for exit
-	      syscall               
-
-	###############################################################
-	# Subroutine to calculate exponent. Another .data segment.
-	###########################################################
-greater: 	mov.s $f16,$f8 #hi =mid
-		b continue
-	   
-less: mov.s $f4,$f8 #lo = mid
-      b continue
+	     # EXIT PROGRAM CLEANLY
+	      li   $v0, 10      # prep call for program exit
+	      syscall           #continue with exiting
