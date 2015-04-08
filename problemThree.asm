@@ -3,7 +3,7 @@
 # Problem Three
 # 4/7/15
 
-# Using Newton's Method to calculate the sqrt of a floating point value to it's closest approximated value
+# Used Newton's Method to calculate the sqrt of a floating point value to it's closest approximated value
 # x' = (1/2)(x + n/x)
 
 	.data

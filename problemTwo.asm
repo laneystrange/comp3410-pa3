@@ -3,7 +3,7 @@
 # Problem Two
 # 4/7/15
 
-# This program will calculate the exponent of a floating point number where the exponent is an integer
+# This program calculates the exponent of a floating point number where the exponent is an integer
 # Input: a floating point number and an integer
 # Output: the result of the floating point number calculated to it's exponent
 
