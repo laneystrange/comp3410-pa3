@@ -49,6 +49,23 @@ Result is 0.11111111
 # Part 3
 ####
 
+Before I get to the sample output, I'd like to embellish on my code a little bit and talk about some ideas that I had.
+My original idea was to implement Newton's Method, and I found a way to do it for square roots that only requires one division at the beginning and then bitshifting to divide by two. 
+There were a few problems, though: I had to get a good first approximation or else risk running AWAY from the zero of the equation.
+I worked out a way to load in the upper word of a double, shift it to gain access to the exponent, and then unweight it and divide by two.
+x*10^(y/2) is of the same magnitude as sqrt(x*10^y), so it was a good place to start.
+But then I hit another roadblock. You can't bitshift on floating point numbers.
+And rightfully so, it only makes sense that you shouldn't mess with the placement of the different portions.
+I'd already looked online before for good ways to approximate the square root of a number, but it only worked with integers.
+This was a problem, because, as the outputs below show, round(sqrt(2.3)) = 2, but round(sqrt(2.2)) = 1.
+sqrt(round(2.3)) and sqrt(round(2.2)) both = 1, on the other hand.
+So I used the integer square root on the rounded number to get a very close approximation to the square root.
+That became my first estimation for Newton's Method.
+The good thing about Newton's Method is that it increases in accuracy quadratically.
+Only six cycles are needed to reach extremely high levels of precision.
+Not something you'd want to do by hand, but child's play for a computer.
+This comes at the cost of doing a division every iteration, but there are so few iterations that I don't view it as a huge shortcoming. Now, on to the output.
+
 Sample output:
 
 Enter a decimal to get square-rooted: 2.2
