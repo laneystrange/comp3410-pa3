@@ -47,6 +47,7 @@ Sample Output:
 My answer to part three is located in partthree.asm.
 
 Sample Output:
+
 	This program approximates the nearest integer square root of a floating point number. 
 	Enter your floating point number: 16.5
 	The approximate result is: 4
