@@ -8,7 +8,7 @@ Problem 1:
 +nop
 +sub $s6, $s1, $s2
 +
-+The final value that is needed is stored in WB, but $s6 is used as a source before it is updated.
++The final value that is needed is stored in WB, but $s6 is used instead.
 +
 +
 +Results for Part 2:
