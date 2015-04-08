@@ -1,0 +1,49 @@
+# comp3410-pa3
+Part 1:
+'addi $s, $s4, 10' was moved to between the two 'lw' statements to avoid $s1 being in use by the first 'lw' and not being accessible to the other one,i.e. overwritten.
+
+'subi $s5, $s4, 4' was moved to between the 'sub' and 'add' statements to prevent a data hazard possible due to the multiple use of $s6
+
+The 'sw' and 'or' statements were switched, which allows the $s6 register to be accessed in the 'sw' statement, loaded, and then the same register to be used as an argument.
+
+Some of these hazards have to be solved with operand forwarding, such as the 'addi'/'sw' pair. The result of the 'addi' needs to be forwarded to the 'sw' command to prevent bubbling. Similarly, the value loaded from 16($s6) needs to be forwardedtothe 'sub' command.
+
+Part 2:
+Test results:
+This program computes x^k.
+Please enter x, in the form of a float: 2.2
+Please enter k, in the form of an int: 6
+The result is: 113.37991
+
+This program computes x^k.
+Please enter x, in the form of a float: 1.1
+Please enter k, in the form of an int: 3
+The result is: 1.3310001
+
+This program computes x^k.
+Please enter x, in the form of a float: 4.25
+Please enter k, in the form of an int: 3
+The result is: 76.765625
+
+This program computes x^k.
+Please enter x, in the form of a float: 7.666
+Please enter k, in the form of an int: 2
+The result is: 58.767555
+
+Part 3:
+Test Results:
+Welcome to the sort-of square-root finder!
+Enter the number you want to find the nearest integer square root of: 16
+The result is: 4
+
+Welcome to the sort-of square-root finder!
+Enter the number you want to find the nearest integer square root of: 17
+The result is: 4
+
+Welcome to the sort-of square-root finder!
+Enter the number you want to find the nearest integer square root of: 16.5
+The result is: 4
+
+Welcome to the sort-of square-root finder!
+Enter the number you want to find the nearest integer square root of: 16.0001
+The result is: 4
