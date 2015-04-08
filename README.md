@@ -1,4 +1,4 @@
-Problem 1:
+Results of Problem 1:
 +
 +There were a few problems. 
 +la $s1, array #loads array 
@@ -11,14 +11,14 @@ Problem 1:
 +The final value that is needed is stored in WB, but $s6 is used instead.
 +
 +
-+Results for Part 2:
++Results of Problem 2:
 +Enter the floating number
 +-9.022
 +Enter the exponent
 +2
 +81.39649
 
-+Results Part 3:
++Results of Problem 3:
 +Enter a positive floating number that will have square root taken
 +68.798
 +
