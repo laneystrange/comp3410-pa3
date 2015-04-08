@@ -39,3 +39,28 @@ Enter the exponent:
 The answer is: 1
 --Ended--
 -- program is finished running --
+
+3.
+Please enter a number that you would like to find the square root of: 
+**** user input : 44
+6.6332493
+--Ended--
+-- program is finished running --
+
+Please enter a number that you would like to find the square root of: 
+**** user input : -12
+Pleae enter a number which is greater than zero!
+--Ended--
+-- program is finished running --
+
+Please enter a number that you would like to find the square root of: 
+**** user input : 567
+23.811762
+--Ended--
+-- program is finished running --
+
+Please enter a number that you would like to find the square root of: 
+**** user input : 8
+2.828427
+--Ended--
+-- program is finished running --
