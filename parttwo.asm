@@ -46,5 +46,6 @@ li $v0, 2		# load syscall code for print float into the return value register
 add.s $f12, $f0, $f4	# load the float result value into the argument register
 syscall			# make the syscall to print the float result value
 
+exit:
 li $v0, 10		# load syscall code for exit program
 syscall			# make the syscall to exit the program
