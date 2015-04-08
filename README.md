@@ -3,9 +3,6 @@
 
 PART 1:
 
-Enyil Padilla
-PART1
-
 lw  $s2, 0($s1) 
 Data hazard because of $s1
 lw  $s1, 16($s6)
@@ -31,5 +28,15 @@ sw  $s6, 12($s1)
 Got rid of the data hazards if pipeline is less than 5, but I think some structural hazards remained...
 I don't know why! D':
 
+PART 2:
+(3,2) = 9.0
+(3,-2) = 0.11111111
+(9,3) = 729.0
+(-9,3) = -729.0
+
 PART 3:
+5.89 = 2
+4.0 = 2
+500.1234 = 22
+739.5685 = 27
 
