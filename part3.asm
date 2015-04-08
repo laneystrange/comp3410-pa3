@@ -1,4 +1,4 @@
-# COMP3410 Whatever (Part 3)
+# COMP3410 Approximate Square Root (Part 3)
 # Author: Kieran Blazier
 # Assignment: PA[3]
 # Date: 4/8/15
@@ -19,24 +19,24 @@ half: .double 0.5
 	.text
 	
 main:
-	la $a0, prompt
+	la $a0, prompt		# write the prompt
 	print_str
 	
-	read_double
+	read_double		# read double input into $f0
 	
-	round.w.d $f0, $f0
-	mfc1.d $a0, $f0
-	jal isqrt
+	round.w.d $f0, $f0	# round the input
+	mfc1.d $a0, $f0		# move the rounded input to $a0
+	jal isqrt		# $v0 = isqrt($a0)
 	
-	move $s0, $v0
+	move $s0, $v0		# save the result
 	
-	la $a0, result
+	la $a0, result		# write the result message
 	print_str
 	
-	move $a0, $s0
-	print_int
+	move $a0, $s0		# pass the result
+	print_int		# print the result
 	
-	exit
+	exit			# exit the program
 
 ###############################################
 # function: isqrt

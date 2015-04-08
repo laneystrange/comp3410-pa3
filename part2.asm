@@ -19,28 +19,28 @@ one: .float 1.0
 	.text
 	
 main:
-	la $a0, prompt_base
+	la $a0, prompt_base	# write the first prompt 
 	print_str
 	
-	read_float
+	read_float		# read the base into $f0
 	
-	la $a0, prompt_exp
+	la $a0, prompt_exp	# write the second prompt 
 	print_str
 	
-	read_int
+	read_int		# read the exponent into $v0
 	
-	mov.s $f12, $f0
-	move $a0, $v0
+	mov.s $f12, $f0		# pass $f0 as $f12
+	move $a0, $v0		# pass $v0 as $a0
 	
-	jal pow
+	jal pow			# $f0 = pow($f12, $a0)
 	
-	la $a0, result
+	la $a0, result		# write the result message
 	print_str
 	
-	mov.s $f12, $f0
-	print_float
-	
-	exit
+	mov.s $f12, $f0		# pass the result
+	print_float		# print the result
+
+	exit			# exit the program
 
 ##########################################################
 # function: pow
