@@ -1,0 +1,83 @@
+#Denzel Young
+#Programming Assingnment 3: Part 2
+
+.data
+	Welcome: .asciiz "This program will take a base number to a power and give you the result as a floating point number.\n" 
+	AskBase: .asciiz "Please enter the base number: \n"
+	AskPower: .asciiz "Please enter the power: \n"
+	Result: .asciiz "The result is: \n"
+	double1: .float 1.0
+
+.text
+	#Prints welcome message
+	li $v0, 4
+	la $a0, Welcome
+	syscall
+	
+	#Prints request for base value from the user
+	li $v0, 4
+	la $a0, AskBase
+	syscall
+	
+	#Stores user input in register $f0
+	li $v0, 6
+	syscall
+	
+	#Stores a second copy of the number to keep track of the base value
+	#add.s $f2, $f0, $zero
+	mov.s $f2, $f0
+	#Stores 1 in register for $s3 to take care of negative exponents
+	addi $s3, $zero, 1
+	
+	#Prints request for power value from the user.
+	li $v0, 4
+	la $a0, AskPower
+	syscall
+	
+	#Stores user input in register $s1
+	li $v0, 5
+	syscall
+	move $s1, $v0
+	
+	l.s $f4, double1
+	
+	#If the exponent is greater than zero, jumps to the PositivePower segment.
+	bgt $s1, $zero, PositivePower
+	#If the exponet is less than zero, jumps to the NegativePower segment.
+	blt $s1, $zero, NegativePower
+	#If the exponent is exactly 0, jumps to ZeroPower segment.
+	beqz $s1, ZeroPower
+	
+PositivePower:
+	mul.s $f2, $f2, $f0 #multiplies the value in $f2 by the ebase and stores it back in $f2
+	subi $s1, $s1, 1 #subtracts 1 from the exponent
+	li $s6, 1
+	bgt $s1, 1, PositivePower #If the exponent hasn't hit 0 yet, we need to continue.
+	j End #If the previous instruction is passed, then the calcuation is done.
+	
+NegativePower:
+	div.s $f4, $f4, $f0 #divides $f4 (which is 1.0) by the answer.
+	addi $s1, $s1, 1 #adds 1 to the exponent
+	li $s7, 1
+	bnez $s1, NegativePower #If the exponent value is less than 0, we need to continue.
+	mov.s $f2, $f4 #Move from $f4 to $f2
+	j End #If the previous instruction is passed, then the calcuation is done.
+	
+ZeroPower:
+	l.s $f2, double1 #Any number to the power of 0 is 1.
+	j End
+
+End:
+	#Prints the result message.
+	li $v0, 4
+	la $a0, Result
+	syscall
+	
+	#Prints the result.
+	li $v0, 2
+	mov.s  $f12, $f2
+	syscall
+	
+	#Closes the program.
+	li $v0, 10
+	syscall
