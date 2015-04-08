@@ -9,6 +9,7 @@ My answer to part one is located in partone.asm.
 Some of the hazards in this program can be solved by operand forwarding, others I have prevented by reorganizing the instructions.
 
 These are my changes to avoid data hazards:
+
 1. The instruction 'addi $s4, $s4, 10' was moved between the instructions 'lw $s2, 0($s1)' and 'lw $s1, 16($s6)'. In this
 way it acts as a buffer for the pipeline stages trying to write to and read from the value in register $s1.
 2. The instruction 'subi $s5, $s4, 4' was moved between the instructions 'sub $s6, $s1, $s2' and 'add $s6, $s2, $s2'. In this
