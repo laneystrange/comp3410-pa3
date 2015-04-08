@@ -1,0 +1,32 @@
+Enter a positive floating number that will have square root taken
+.00111
+
+0
+-- program is finished running --
+
+Enter a positive floating number that will have square root taken
+5000.123
+
+71
+-- program is finished running --
+
+Enter a positive floating number that will have square root taken
+51.123
+
+7
+-- program is finished running --
+
+Enter a positive floating number that will have square root taken
+48.123
+
+7
+-- program is finished running --
+
+Enter a positive floating number that will have square root taken
+-81 #heare is where i check the program does not take negative number
+
+Number was not positive; please try again
+9
+
+3
+-- program is finished running --
