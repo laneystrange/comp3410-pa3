@@ -1,0 +1,41 @@
+.data
+
+one: .float 1.0
+
+.text
+
+la $v0, 6 
+syscall
+
+mov.s $f1, $f0
+
+la $v0, 5 
+syscall
+		#v0 contains the int
+move $t1, $v0
+move $t2, $v0
+li $t0, -1 	#negative counter
+bltz $t1, NegLoop #if exponent is negatvie then branch
+li $t0, 1 
+
+
+PosLoop:
+ beq $t0, $t1, EndLoop #end if finished
+ mul.s $f0, $f0, $f1 
+ addi $t0, $t0, 1 #counter
+ j PosLoop
+ 
+ 
+NegLoop: #begin negative loop
+ beq $t0, $t1, FinLoop 
+ mul.s $f0, $f0, $f1 
+ subi $t0, $t0, 1 
+ j NegLoop
+FinLoop: #finish negative loop
+
+ l.s $f1, one
+ div.s $f0, $f1, $f0 
+EndLoop:
+ li $v0, 2
+ mov.s $f12, $f0
+ syscall
