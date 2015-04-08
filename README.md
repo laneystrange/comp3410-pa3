@@ -1,5 +1,5 @@
 # comp3410-pa3
-
+#Aaron Marshall
 Part 1:
 Main thing is to spread out the code to avoid stalling due to multiple things being accessed at multiple stage of run time.
 
