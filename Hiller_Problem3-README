@@ -1,0 +1,17 @@
+Here are some sample outputs from the sqrt program:
+
+Please Enter A Number Greater Than Zero: 144
+The Square Root Integer Is: 12
+-- program is finished running --
+
+Please Enter A Number Greater Than Zero: -15
+Invalid Format, Must be Greater Than Zero: 
+-- program is finished running --
+
+Please Enter A Number Greater Than Zero: 12
+The Square Root Integer Is: 3
+-- program is finished running --
+
+Please Enter A Number Greater Than Zero: 25.867
+The Square Root Integer Is: 5
+-- program is finished running --
