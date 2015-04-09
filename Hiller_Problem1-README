@@ -1,0 +1,3 @@
+I was able to eliminate or reduce the consequences of some of the hazards. I tried using the null operaters as 
+somewhat of a cushion between operators. I also moved around some of the computations to try and better
+organize the sequence to reduce hazards.

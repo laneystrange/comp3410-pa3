@@ -1,0 +1,20 @@
+Here are some sample outputs:
+
+Enter the Floating Point Number for x: 16
+Enter the integer for k: 3
+Result of x^k: 4096.0
+-- program is finished running --
+
+Enter the integer for k: 2
+Result of x^k: 561.69006
+-- program is finished running --
+
+Enter the Floating Point Number for x: 6.23
+Enter the integer for k: -5
+Result of x^k: 1.0655155E-4
+-- program is finished running --
+
+Enter the Floating Point Number for x: 2.34
+Enter the integer for k: 2
+Result of x^k: 5.4756
+-- program is finished running --
